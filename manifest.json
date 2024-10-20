@@ -2,7 +2,14 @@
     "manifest_version": 3,
     "name": "Vim Modal Text Editor",
     "version": "1.0",
-    "permissions": ["activeTab"],
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
     "background": {
         "service_worker": "background.js"
     },
@@ -17,5 +24,6 @@
     }
     ]
 }
+
 
 

@@ -12,21 +12,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }, function (popup) {
             chrome.storage.local.set({ text: message.text });
         });
-    }
-});
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === "updateText") {
+    } else if (message.action === "updateText") {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                func: (text) => {
-                    document.activeElement.value = text;
-                },
-                args: [message.text]
-            });
+            if (tabs && tabs.length > 0) {
+                chrome.tabs.sendMessage(tabs[0].id, { action: "updateText", text: message.text });
+            } else {
+                console.error("No active tab found");
+            }
         });
     }
 });
-
-
