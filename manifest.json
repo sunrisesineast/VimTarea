@@ -16,9 +16,6 @@
         "css": ["styles.css"]
     }
     ],
-    "content_security_policy": {
-        "extension_pages": "script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'"
-    }
 }
 
 
